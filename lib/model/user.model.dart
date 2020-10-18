@@ -47,7 +47,9 @@ class UserModel extends Model {
   }
 
   void recoverPass() {}
-  bool isLoggedIn() {}
+  bool isLoggedIn() {
+    return firebaseUser != null;
+  }
 
   Future<Null> _saveUserData(Map<String, dynamic> userData) async {
     this.userData = userData;

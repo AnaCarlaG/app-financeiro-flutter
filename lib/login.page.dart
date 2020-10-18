@@ -1,3 +1,4 @@
+import 'package:financeiro/gerencia.page.dart';
 import 'package:financeiro/model/user.model.dart';
 import 'package:financeiro/reset-password.page.dart';
 import 'package:financeiro/signup.page.dart';
@@ -134,7 +135,13 @@ class LoginPage extends StatelessWidget {
                     ),
                     onPressed: () => {
                       ///if (_formKey.currentState.validate()) {}
-                      model.signin()
+                      model.signin(),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Gerencia(),
+                        ),
+                      )
                     },
                   ),
                 ),

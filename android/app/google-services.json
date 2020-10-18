@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "804044891381",
-    "firebase_url": "https://financeiro-5df96.firebaseio.com",
-    "project_id": "financeiro-5df96",
-    "storage_bucket": "financeiro-5df96.appspot.com"
+    "project_number": "400543463915",
+    "firebase_url": "https://financeiro-a6392.firebaseio.com",
+    "project_id": "financeiro-a6392",
+    "storage_bucket": "financeiro-a6392.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:804044891381:android:88a2011aa26dabaaead1bc",
+        "mobilesdk_app_id": "1:400543463915:android:c21cf7265f8c0bd2a5c1ae",
         "android_client_info": {
           "package_name": "com.example.financeiro"
         }
       },
       "oauth_client": [
         {
-          "client_id": "804044891381-niq6tkhjbki42l9ej01ppijmtfudild2.apps.googleusercontent.com",
+          "client_id": "400543463915-3fvfrnj16lh2i1l8lpjubihfcdoqtd1v.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCZAz88T-QAwtBwEZsg3TUKdcBejHnO5Os"
+          "current_key": "AIzaSyAhoZ_AfshYVCx2gX221_ewRlBbW9w66cw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "804044891381-niq6tkhjbki42l9ej01ppijmtfudild2.apps.googleusercontent.com",
+              "client_id": "400543463915-3fvfrnj16lh2i1l8lpjubihfcdoqtd1v.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
