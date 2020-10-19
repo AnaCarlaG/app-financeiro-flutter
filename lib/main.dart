@@ -2,9 +2,14 @@ import 'package:financeiro/login.page.dart';
 import 'package:financeiro/model/user.model.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
+  
 }
 
 class MyApp extends StatelessWidget {
