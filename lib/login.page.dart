@@ -134,8 +134,8 @@ class LoginPage extends StatelessWidget {
                       ],
                     ),
                     onPressed: () => {
-                      ///if (_formKey.currentState.validate()) {}
-                      model.signin(),
+                      if (_formKey.currentState.validate()) {},
+                      !model.isLoggedIn() ? "cadastre-se" : model.signin(),
                       Navigator.push(
                         context,
                         MaterialPageRoute(

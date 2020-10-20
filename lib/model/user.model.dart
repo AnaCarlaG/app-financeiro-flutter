@@ -6,13 +6,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class UserModel extends Model {
   FirebaseAuth _auth = FirebaseAuth.instance;
-  FirebaseUser firebaseUser;
+  User firebaseUser;
   Map<String, dynamic> userData = Map();
   bool isLoading = false;
 
   void signup(
       {@required Map<String, dynamic> userData,
-      @required String pass,
+      @required String password,
       @required VoidCallback onSucess,
       @required VoidCallback onFail}) {
     isLoading = true;
@@ -21,7 +21,7 @@ class UserModel extends Model {
     _auth
         .createUserWithEmailAndPassword(
           email: userData["email"],
-          password: pass,
+          password: password,
         )
         .then((user) async => {
               firebaseUser = user.user,
@@ -51,12 +51,12 @@ class UserModel extends Model {
     return firebaseUser != null;
   }
 
-  Future<Null> _saveUserData(Map<String, dynamic> userData) async {
+  Future _saveUserData(Map<String, dynamic> userData) async {
     this.userData = userData;
 
-    await Firestore.instance
-        .collection("users")
-        .document(firebaseUser.uid)
-        .setData(userData);
+    await FirebaseFirestore.instance
+        .collection("user")
+        .doc(firebaseUser.uid)
+        .set(this.userData);
   }
 }
