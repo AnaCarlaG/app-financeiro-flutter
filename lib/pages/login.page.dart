@@ -1,15 +1,27 @@
-import 'package:financeiro/gerencia.page.dart';
+import 'package:financeiro/pages/gerencia.page.dart';
 import 'package:financeiro/model/user.model.dart';
-import 'package:financeiro/reset-password.page.dart';
-import 'package:financeiro/signup.page.dart';
+import 'package:financeiro/pages/reset-password.page.dart';
+import 'package:financeiro/pages/signup.page.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final _emailController = TextEditingController();
+
+  final _passController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: ScopedModelDescendant<UserModel>(builder: (context, child, model) {
         if (model.isLoading)
           return Center(
@@ -35,6 +47,7 @@ class LoginPage extends StatelessWidget {
                 height: 20,
               ),
               TextFormField(
+                controller: _emailController,
                 //autofocus: true,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
@@ -55,6 +68,7 @@ class LoginPage extends StatelessWidget {
                 height: 10,
               ),
               TextFormField(
+                controller: _passController,
                 //autofocus: true,
                 keyboardType: TextInputType.text,
                 obscureText: true,
@@ -133,15 +147,15 @@ class LoginPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onPressed: () => {
-                      if (_formKey.currentState.validate()) {},
-                      !model.isLoggedIn() ? "cadastre-se" : model.signin(),
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Gerencia(),
-                        ),
-                      )
+                    onPressed: () {
+                      if (_formKey.currentState.validate()) {}
+                      ;
+                      model.signin(
+                        email: _emailController.text,
+                        password: _passController.text,
+                        onSucess: _onSucess,
+                        onFail: _onFail,
+                      );
                     },
                   ),
                 ),
@@ -170,5 +184,22 @@ class LoginPage extends StatelessWidget {
         );
       }),
     );
+  }
+
+  _onSucess() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => GerenciaPage(),
+      ),
+    );
+  }
+
+  _onFail() {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text("Falha ao fazer o login"),
+      backgroundColor: Colors.redAccent,
+      duration: Duration(seconds: 10),
+    ));
   }
 }

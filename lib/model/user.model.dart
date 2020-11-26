@@ -15,7 +15,7 @@ class UserModel extends Model {
       @required String password,
       @required VoidCallback onSucess,
       @required VoidCallback onFail}) {
-    isLoading = true;
+    isLoading = false;
     notifyListeners();
 
     _auth
@@ -36,17 +36,45 @@ class UserModel extends Model {
     });
   }
 
-  void signin() async {
+  void signin(
+      {@required String email,
+      @required String password,
+      @required VoidCallback onSucess,
+      @required VoidCallback onFail}) async {
     isLoading = true;
     notifyListeners();
 
-    await Future.delayed(Duration(seconds: 3));
+    _auth.signInWithEmailAndPassword(email: email, password: password).then(
+      (user) async {
+        firebaseUser = user.user;
+        await _loadCurrentUser();
+        onSucess();
+        isLoading = false;
+        notifyListeners();
+      },
+    ).catchError(
+      (e) {
+        onFail();
+        notifyListeners();
+      },
+    );
 
     isLoading = false;
     notifyListeners();
   }
 
-  void recoverPass() {}
+  void signOut() async {
+    await _auth.signOut();
+
+    userData = Map();
+    firebaseUser = null;
+    notifyListeners();
+  }
+
+  void recoverPass(String email) {
+    _auth.sendPasswordResetEmail(email: email);
+  }
+
   bool isLoggedIn() {
     return firebaseUser != null;
   }
@@ -58,5 +86,21 @@ class UserModel extends Model {
         .collection("user")
         .doc(firebaseUser.uid)
         .set(this.userData);
+  }
+
+  Future _loadCurrentUser() async {
+    if (firebaseUser == null) {
+      firebaseUser = await _auth.currentUser;
+    }
+    if (firebaseUser != null) {
+      if (userData["name"] == null) {
+        DocumentSnapshot docUser = await FirebaseFirestore.instance
+            .collection("user")
+            .doc(firebaseUser.uid)
+            .get();
+        userData = docUser.data();
+      }
+    }
+    notifyListeners();
   }
 }
