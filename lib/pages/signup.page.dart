@@ -23,7 +23,8 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: ScopedModelDescendant<UserModel>(
+    return Scaffold(
+      body: ScopedModelDescendant<UserModel>(
       builder: (context, child, model) {
         if (model.isLoading) {
           return Center(
