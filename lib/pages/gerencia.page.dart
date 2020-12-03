@@ -1,6 +1,6 @@
-import 'package:financeiro/util/gerencia_tab.dart';
 import 'package:financeiro/util/custom_drawer.dart';
-import 'package:financeiro/util/tag_tab.dart';
+import 'package:financeiro/util/tab/gerencia_tab.dart';
+import 'package:financeiro/util/tab/tag_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -13,7 +13,7 @@ class GerenciaPage extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
         Scaffold(
-          body: GerenciaTab(),
+          body: SafeArea(child: GerenciaTab()),
           drawer: CustomDrawer(_pageController),
         ),
         Scaffold(

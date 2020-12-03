@@ -63,11 +63,15 @@ class CustomDrawer extends StatelessWidget {
               height: 20,
             ),
             DrawerTile(
-                Icons.sentiment_very_satisfied, "Tags", pageController, 1),
+                Icons.sentiment_very_satisfied, "Profile", pageController, 1),
             SizedBox(
               height: 20,
             ),
-            DrawerTile(Icons.trending_up, "Relatório", pageController, 2),
+            DrawerTile(Icons.list_alt_sharp, "Tags", pageController, 2),
+            SizedBox(
+              height: 20,
+            ),
+            DrawerTile(Icons.trending_up, "Relatório", pageController, 3),
             SizedBox(
               height: 20,
             ),
